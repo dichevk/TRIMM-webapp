@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#main_box {
+	margin-left: 28%;
+	margin-top: 10%;
+	background-color: gray;
+	border-style: solid;
+	height: 70%;
+	width: 30%;
+	padding-bottom:1%;
+}
+
+#input_form {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+
+input[type=text] {
+	width: 100%;
+	padding: 10px 20px;
+	margin: 0px 0;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+}
+
+input[type=text]:hover {
+	border: 3px solid #555;
+}
+
+input[type=password] {
+	width: 100%;
+	padding: 10px 20px;
+	margin: 0px 0;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+}
+
+input[type=password]:hover {
+	border: 3px solid #555;
+}
+
+.button {
+	background-color: #6a6b91; /* Green */
+	border: none;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	width: 80%;
+}
+
+.buttonform {
+	border-radius: 8px;
+}
+
+.buttonform:hover {
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+#formtext {
+	text-align: center;
+	font-size: 16pt;
+	color: white;
+	font-weight: bold;
+}
+
+#formtext:hover {
+	color: #bfbfbf;
+}
+
+#buttonspace {
+	margin-top: 3%;
+}
+
+#logo {
+	height: 30%;
+	width: 80%;
+	position: relative;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 10%
+}
+
+#logo:hover {
+	opacity: 0.1;
+}
+</style>
+
+</head>
+<body>
+	<div id="main_box">
+		<img src="logo.png" id="logo">
+		<form id="input_form">
+
+			<div id="formtext" >User name</div>
+			<input type="text" name ="username" id="username">
+			<div id="formtext">Password</div>
+			<input type="password" id="password">
+			<center>
+				<div id="buttonspace">
+					<input type="submit" class="button buttonform"  onclick="sendLogIn(); return false;">Log in</input>
+					</div>
+			</center>
+		</form>
+	</div>
+
+
+	<script>
+		function sendLogIn() {
+			var user = document.getElementById("username").value;
+			var pass = document.getElementById("password").value;
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					alert("do I enter here");
+					var myObj = this.responseText;
+					alert(myObj);//use my object to see the result and riderect
+				}
+			}
+			alert(pass);
+
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/authentication/login?username="
+									+ user + "&password=" + pass, true);
+			//xhr.setRequestHeader("Access-Control-Allow-Origin", "http://localhost:8080/TRIMM_visualizing_runners_data_42");
+			xhr.send();
+		}
+
+		/*function sendLogIn(){
+			var restServlet = "localhost::8080//TRIMM_visualizing_runners_data_42/rest/authentication/";
+			var myObj = "@";
+			var username = document.getElementById("username");
+			var password =  document.getElementById("password");
+			var	xmlhttp = new XMLHttpRequest();
+		        	xmlhttp.onreadystatechange = function() {
+		        		
+		        	    if (this.readyState == 4 && this.status == 0) {
+		        	    	alert(this.readyState+" "+this.status);
+		        	    	//call function for saving if ok 
+		        	    	alert(myObj);
+		        	    	myObj = JSON.parse(this.responseText);
+		        	    	
+		        	    	if(myObj.answer=="success"){
+		        	    		alert("it is ok");
+		        	    	saveUser(username);
+		        	    	window.location.href = "add location";
+		        	        }else{
+		        	        	document.getElementById("authenticationProblem").innerHTML = "Wrong username or password";
+
+		        	        }
+		        	    }
+		        	}
+					 // if we want to send with json add it here 
+		        	xmlhttp.open("GET", restServlet + "login?"+"username="+username+"&password="+password, true);
+		        	xmlhttp.send();
+			    
+			}*/
+	</script>
+	<script>
+		function saveUser(name) {
+			var username = name;
+			return username;
+
+		}
+	</script>
+
+</body>
+</html>

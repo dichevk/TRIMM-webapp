@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#graph1 {
+	height: 40%;
+	width: 70%;
+}
+
+#graph2 {
+	height: 40%;
+	width: 70%;
+}
+</style>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<!--  <link rel="stylesheet" type="text/css"
+	href = "path/to/chartjs/dist/Chart.min.css" > -->
+</head>
+<body>
+	<div id="graph1">
+		<canvas id="myChart" width="300" height="300"></canvas>
+	</div>
+	<div id="graph2">
+		<canvas id="myChart1" width="300" height="300"></canvas>
+	</div>
+
+	<script>
+		var username = "CvdB";
+		var run = 1;
+		var result = [];
+		var variable = "steps";
+		var steps;
+		var st = [];
+		var time = [];
+		var secvar = [];
+
+		//main variables
+		window.onload = function getVariableMain(variable) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					steps = parseInt(JSON.parse(this.responseText));
+					//console.log(steps);
+					stepsArray();
+					getVariableOther(variable);
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/steps?username=CvdB&run=1",
+							true);
+			xhr.send();
+
+		}
+
+		//other variables
+		function getVariableOther(variable) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					var data = JSON.parse(this.responseText);
+					resultArray(data);
+					firstChart();
+					getTimeToVariable(variable);
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/variable?username=CvdB&run=1&variable=axtibacc_right",
+							true);
+			xhr.send();
+		}
+
+		function resultArray(d) {
+			var count = 99;
+			var length = d.length / 100;
+			result[0] = d[0];
+			for (var i = 1; i < length; i++) {
+				result[i] = d[count];
+				count = count + 100;
+			}
+		}
+
+		function stepsArray() {
+			var count = 100;
+			var length = steps / 100;
+			st[0] = 1;
+			for (var i = 1; i < length; i++) {
+				st[i] = count;
+				count = count + 100;
+			}
+		}
+		function getTimeToVariable(variable) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					var data = JSON.parse(this.responseText);
+					//console.log(data);
+					TimeInArray(data);
+					getSecondVariable(variable);
+
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/timestamp_to_variable?username=CvdB&run=1&variable=axtibacc_right",
+							true);
+			xhr.send();
+
+		}
+		function TimeInArray(data) {
+			/*for (var i = 0; i < data.length; i++) {
+				time[i] = data[i];
+			}*/
+						
+			var count = 100;
+			var length = data.length / 100;
+			time[0] = 1;
+			for (var i = 1; i < length; i++) {
+				time[i] = count;
+				count = count + 100;
+			}
+
+		}
+		function getSecondVariable(variable) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					var data = JSON.parse(this.responseText);
+					secVarArray(data);
+					secondChart();
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/overview_variable?username=CvdB&run=1&variable1=axtibacc_right&variable2=axtibacc_left",
+							true);
+			xhr.send();
+
+		}
+		function secVarArray(data) {
+			/*for (var i = 0; i < data.length; i++) {
+				secvar[i] = data[i];
+			}
+			console.log("secvar:" + secvar.length);*/
+			
+			var count = 99;
+			var length = data.length / 100;
+			secvar[0] = data[0];
+			for (var i = 1; i < length; i++) {
+				secvar[i] = data[count];
+				count = count + 100;
+			}
+
+		}
+
+		function firstChart() {
+			//chart
+			var ctx = document.getElementById('myChart').getContext('2d');
+
+			//the chart starts here
+			var myChart = new Chart(ctx, {
+				type : 'line',
+				data : {
+					labels : st,
+					datasets : [ {
+						label : 'Axial tibial acceleration(right)',
+						data : result,
+
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+		}
+
+		function secondChart() {
+			var ctx1 = document.getElementById('myChart1').getContext('2d');
+			//the chart starts here
+			var myChart = new Chart(ctx1, {
+				type : 'line',
+				data : {
+					labels : time,
+					datasets : [ {
+						label : 'Steps to variables',
+						data : secvar,
+
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+		}
+	</script>
+
+
+	/
+	<script>
+	/*
+		var username = "CvdB";
+		var run = 1;
+		var result = [];
+		var variable = "step";
+		var res;
+		var st = [];
+
+		//main variables
+
+		//other variables
+		/*function getVariableOther(variable) {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					var data = JSON.parse(this.responseText);
+					resultArray(data);
+					firstChart();
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/variable?username=CvdB&run=1&variable=axtibacc_right",
+							true);
+			xhr.send();
+		}
+
+		function resultArray(d) {
+
+			for (var i = 0; i < d.length; i++) {
+				result[i] = d[i];
+
+			}
+		}
+
+		function stepsArray() {
+			var count = 1;
+			for (var i = 0; i < steps; i++) {
+				st[i] = count;
+				count++;
+			}
+			//console.log(st);
+		}
+
+		function firstChart() {
+			//chart
+			var ctx = document.getElementById('myChart').getContext('2d');
+
+			//the chart starts here
+			var myChart = new Chart(ctx, {
+				type : 'line',
+				data : {
+					labels : st,
+					datasets : [ {
+						label : 'Steps to variables',
+						data : result,
+
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+		}
+
+		//second graph
+		var ctx1 = document.getElementById('myChart1').getContext('2d');
+		//the chart starts here
+		var myChart = new Chart(ctx1, {
+			type : 'line',
+			data : {
+				labels : [ 'Minute 1', 'Minute 2', 'Minute 3', 'Minute 5',
+						'Minute 6', 'Minute 7' ],
+				datasets : [ {
+					label : 'Pace for example',
+					data : [ 12, 19, 3, 5, 2, 3 ],
+
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				}
+			}
+		});
+		*/
+	</script>
+</body>
+</html>

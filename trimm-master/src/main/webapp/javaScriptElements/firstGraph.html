@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#graph1 {
+	height: 40%;
+	width: 70%;
+}
+</style>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<!--  <link rel="stylesheet" type="text/css"
+	href = "path/to/chartjs/dist/Chart.min.css" > -->
+</head>
+<body>
+	<div id="graph1">
+		<button onclick="hide(event, resultRight, 0)">Right</button>
+		<button onclick="hide(event, resultLeft, 1)">Left</button>
+		<canvas id="myChart" width="300" height="300"></canvas>
+	</div>
+
+	<script>
+		var resultRight = [];
+		var resultLeft = [];
+		var steps;
+		var st = [];
+		var hidden = false;
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart;
+
+		window.onload = function getSteps() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					steps = parseInt(JSON.parse(this.responseText));
+					stepsArray();
+					getVariableRight();
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/steps?username=CvdB&run=1",
+							true);
+			xhr.send();
+
+		}
+
+		function getVariableRight() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					var right = JSON.parse(this.responseText);
+					resultArray(right, resultRight);
+					getVariableLeft();
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/variable?username=CvdB&run=1&variable=axtibacc_right",
+							true);
+			xhr.send();
+		}
+
+		function getVariableLeft() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				console.log(this.readyState + " " + this.status);
+				if (this.readyState == 4 && this.status == 200) {
+					var left = JSON.parse(this.responseText);
+					resultArray(left, resultLeft);
+					firstChart();
+				}
+			}
+			xhr
+					.open(
+							"GET",
+							"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/variable?username=CvdB&run=1&variable=axtibacc_left",
+							true);
+			xhr.send();
+		}
+
+		function hide(event, result, i) {
+			if (!hidden) {
+				myChart.data.datasets[i].data = [];
+				myChart.update();
+				hidden = true;
+			} else {
+				myChart.data.datasets[i].data = result;
+				myChart.update();
+				hidden = false;
+			}
+		}
+
+		function resultArray(d, resultArray) {
+			var count = 99;
+			var length = d.length / 100;
+			resultArray[0] = d[0];
+			for (var i = 1; i < length; i++) {
+				resultArray[i] = d[count];
+				count = count + 100;
+			}
+		}
+
+		function stepsArray() {
+			var count = 100;
+			var length = steps / 100;
+			st[0] = 1;
+			for (var i = 1; i < length; i++) {
+				st[i] = count;
+				count = count + 100;
+			}
+		}
+
+		function firstChart() {
+			myChart = new Chart(ctx, {
+				type : 'line',
+				data : {
+					labels : st,
+					datasets : [ {
+						label : 'Axial tibial acceleration(right)',
+						data : resultRight,
+						backgroundColor : 'rgba(241, 181, 181, 1)',
+						borderColor : 'rgba(226, 94, 94, 1)',
+						pointBackgroundColor : 'rgba(226, 94, 94, 1)',
+						pointBorderColor : 'rgba(217, 48, 48, 1)',
+						borderWidth : 1
+					}, {
+						label : 'Axial tibial acceleration(left)',
+						data : resultLeft,
+						backgroundColor : 'rgba(181, 241, 211, 1)',
+						borderColor : 'rgba(92, 223, 158, 1)',
+						pointBackgroundColor : 'rgba(92, 223, 158, 1)',
+						pointBorderColor : 'rgba(49, 215, 132, 1)',
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+</title>
+<style>
+#main_box {
+	margin-left: 28%;
+	margin-top: 10%;
+	background-color: gray;
+	border-style: solid;
+	height: 70%;
+	width: 30%;
+	padding-bottom:1%;
+}
+
+#input_form {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+
+input[type=text] {
+	width: 100%;
+	padding: 10px 20px;
+	margin: 0px 0;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+}
+
+input[type=text]:hover {
+	border: 3px solid #555;
+}
+
+input[type=password] {
+	width: 100%;
+	padding: 10px 20px;
+	margin: 0px 0;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+}
+
+input[type=password]:hover {
+	border: 3px solid #555;
+}
+
+.button {
+	background-color: #6a6b91; /* Green */
+	border: none;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	width: 80%;
+}
+
+.buttonform {
+	border-radius: 8px;
+}
+
+.buttonform:hover {
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+#formtext {
+	text-align: center;
+	font-size: 16pt;
+	color: white;
+	font-weight: bold;
+}
+
+#formtext:hover {
+	color: #bfbfbf;
+}
+
+#buttonspace {
+	margin-top: 3%;
+}
+
+#logo {
+	height: 30%;
+	width: 80%;
+	position: relative;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 10%
+}
+
+#logo:hover {
+	opacity: 0.1;
+}
+</style>
+
+</head>
+<body>
+<div id="main_box">
+		<img src="logo.png" id="logo">
+		<form id="input_form">
+
+			<div id="formtext" >User name</div>
+			<input type="text" name ="username" id="username">
+			<div id="formtext">Password</div>
+			<input type="password" id="password">
+			<div id="formtext">Repeat Password</div>
+			<input type="password" id="passwordconfirm" >
+			<center>
+				<div id="buttonspace">
+					<input type="submit" class="button buttonform"  onclick="sendSignUp(); return false;">Log in</input>
+					</div>
+			</center>
+		</form>
+	</div>
+		
+
+	<script>
+		//alert("I just started");
+		//var restServlet = "http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/authentication/";
+		var us = "";
+		var pass = "";
+		function sendSignUp() {
+			
+			var	xmlhttp = new XMLHttpRequest();
+        	xmlhttp.onreadystatechange = function() {
+        		
+        	    if (this.readyState == 4 && this.status == 204) {
+        	    	alert("a chestito");
+        
+        	    }
+        	}
+
+			alert(document.getElementById("password").value + " "
+					+ document.getElementById("passwordconfirm").value);
+			if (document.getElementById("password").value == document
+					.getElementById("passwordconfirm").value) {
+				alert("I am after");
+				us = document.getElementById("username").value;
+				pass = document.getElementById("password").value;
+				alert(us + " " + pass);
+				var xhr = new XMLHttpRequest();
+				alert("Just before open");
+				
+				alert("I open");
+				xhr
+						.open(
+								"POST",
+								"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/authentication/reg?username="
+										+ us + "&password=" + pass, true);
+				alert("Just before send");
+				xhr.setRequestHeader("Content-type", "application/json");
+				xhr.send();
+				//window.location.href = "add location here";
+
+			} else {
+				//Add an error if the passwords dont match
+				document.getElementById("passDontMatch").innerHTML = "The passwords dont match";
+
+			}
+
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Account | TRIMM Dashboard</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<script type="text/javascript" src="DOMPurify-master/dist/purify.min.js"></script>
+<link href="css/AccountCSS.css" rel="stylesheet">
+<script type="text/javascript" src="js/AccountJS.js"></script>
+<script type="text/javascript" src="js/URLlock.js"></script> 
+</head>
+<body onload="checkIfloggedIn(); getAcc();">
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="MyRuns.html">My Runs</a> <a href="comparepage.html">Compare
+			Runs</a> <a href="helpMain.html">Help</a> <a href="#"
+			onclick="logout(); return false;">Log out</a>
+	</div>
+
+	<span id="open"
+		style="font-size: 50px; cursor: pointer; top: 0px; left: 3%; position: fixed; z-index: 10000; color: white"
+		onclick="openNav()">&#9776;</span>
+	<div id="main">
+		<!--<h2 style="text-align:center">User Profile</h2>-->
+
+		<div class="card">
+			<img id="topright" src="trimm_logo.svg"> <img
+				src="runner-picture2.jpg" alt="Trimm"
+				style="width: 100%; height: 5%;">
+
+			<h1 id="username"></h1>
+			<p id="distance" class="title">Total distance:</p>
+			<p id="steps" class="title">Total steps:</p>
+			<p id="firstname">First name:</p>
+			<p id="lastname">Last name:</p>
+			<p id="height">Height:</p>
+			<p id="weight">Weight:</p>
+
+			<!-- <div style="margin: 24px 0;">
+    <a href="#"><i class="">Strava Account</i></a> 
+    </div>-->
+			<p id="editsave">
+				<button id="edit" onclick="edit(); return false;">Edit
+					account information</button>
+			</p>
+			<p id="deleteacc">
+				<button id="delete" onclick="openWind(); return false;">Delete account</button>
+			</p>
+			<!-- The Modal -->
+			<div id="myModal" class="modal">
+
+				<!-- Modal content -->
+				<div class="modal-content">
+					<span class="close" onclick="closeWind(); return false;">&times;</span>
+					<p><b><font color="red" style="font-size:20px;">WARNING!</font></b></p>
+					<p><font style="font-size:18px;">You are about to delete your account.</font></p>
+					<p><b><font style="font-size:18px;">Click Cancel to go back or Delete to proceed with deletion</font></b></p>
+					<p><button onclick="closeWind(); return false;">Cancel</button></p>
+					<p><button style="background-color:#8B0000" onclick="sendDel(); return false;">Delete</button></p>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

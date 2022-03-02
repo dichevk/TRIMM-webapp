@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="css/Run1.css" rel="stylesheet">
+
+<title></title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js">
+	
+</script>
+<script
+	src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels">
+</script>
+</head>
+<body>
+
+	<div class="container">
+		<section class="first_graph">
+
+			<div class="overview">
+				<div id="overview1"></div>
+				<div id="overview2"></div>
+				<div id="overview3"></div>
+				<div id="overview4"></div>
+				<div id="overview5"></div>
+				<div id="overview6"></div>
+
+				<div id="description-for-overview1">
+					<p>
+						<b>Distance</b>
+					</p>
+				</div>
+				<div id="description-for-overview2">
+					<p>
+						<b>Time</b>
+					</p>
+				</div>
+				<div id="description-for-overview3">
+					<p>
+						<b>Description</b>
+					</p>
+				</div>
+				<div id="description-for-overview4">
+					<p>
+						<b>Date</b>
+					</p>
+				</div>
+				<div id="description-for-overview5">
+					<p>
+						<b>Pace</b>
+				</div>
+				<div id="description-for-overview6">
+					<p>
+						<b>Shoes</b>
+				</div>
+
+				<div id="graph1">
+					<canvas id="chart1"></canvas>
+				</div>
+				<div id="mySidenav" class="sidenav">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+					<a href="Account.html">Account</a> <a href="MyRuns.html">My
+						Runs</a> <a href="comparepage.html">Compare Runs</a> <a
+						href="helpMain.html">Help</a> <a href="#"
+						onclick="logout(); return false;">Log out</a>
+
+				</div>
+
+				<button id="someButton1" class="btn" onclick="hide(0, chart1)">Tibial
+					impact</button>
+				<button id="someButton2" class="btn" onclick="hide(1, chart1)">Braking
+					force</button>
+				<button id="someButton3" class="btn" onclick="hide(2, chart1)">Push-off
+					power</button>
+				<button id="someButton4" class="btn" onclick="hide(3, chart1)">Pace</button>
+
+				<button id="someButton5" class="btn" onclick="hide(0, chart2)">Tibial
+					impact(L)</button>
+				<button id="someButton6" class="btn" onclick="hide(1, chart2)">Tibial
+					impact(R)</button>
+				<button id="someButton7" class="btn" onclick="hide(2, chart2)">Sacral
+					impact(L)</button>
+				<button id="someButton8" class="btn" onclick="hide(3, chart2)">Sacral
+					impact(R)</button>
+				<button id="someButton9" class="btn" onclick="hide(4, chart2)">Braking
+					force(L)</button>
+				<button id="someButton10" class="btn" onclick="hide(5, chart2)">Braking
+					force(R)</button>
+				<button id="someButton11" class="btn" onclick="hide(6, chart2)">Axial
+					tibial acceleration(L)</button>
+				<button id="someButton12" class="btn" onclick="hide(7, chart2)">Axial
+					tibial acceleration(R)</button>
+				<button id="someButton13" class="btn" onclick="hide(8, chart2)">Axial
+					sacral acceleration(L)</button>
+				<button id="someButton14" class="btn" onclick="hide(9, chart2)">Axial
+					sacral acceleration(R)</button>
+				<button id="someButton15" class="btn" onclick="hide(10, chart2)">Vertical
+					lower leg angle(L)</button>
+				<button id="someButton16" class="btn" onclick="hide(11, chart2)">Vertical
+					lower leg angle(R)</button>
+				<a id="download1" download="image.png"><button id="download1a"
+						class="btn" type="button" onclick="download(1)">Save
+						graph</button></a> <a id="download2" download="image.png"><button
+						id="download2a" class="btn" type="button" onclick="download(2)">Save
+						graph</button></a> <a id="download3" download="image.png"><button
+						id="download3a" class="btn" type="button" onclick="download(3)">Save
+						graph</button></a>
+				<div id="thespan">
+					<span id="open"
+						style="font-size: 40px; cursor: pointer; top: 0px; left: 3%; position: fixed; z-index: 10000000; color: #1c9ebc"
+						onclick="openNav()">&#9776;</span>
+				</div>
+		</section>
+
+		<section class="second-graph">
+			<div class="thesecondone">
+				<canvas id="chart2"></canvas>
+			</div>
+
+		</section>
+		<section class="third-graph">
+			<div class="dropdown" style="float: left;">
+				<button class="dropdownbtn">Shoes</button>
+				<div class="dropdown-content">
+					<div id="shoes_brand">
+						<b>Brand: </b>
+					</div>
+					<div id="shoes_model">
+						<b>Model: </b>
+					</div>
+					<div id="shoes_heel">
+						<b>Heel: </b>
+					</div>
+					<div id="shoes_forefoot">
+						<b>Forefoot: </b>
+					</div>
+					<div id="shoes_drop">
+						<b>Drop: </b>
+					</div>
+					<div id="shoes_weight">
+						<b>Weight: </b>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="thethirdone">
+				<canvas id="chart3"></canvas>
+			</div>
+
+		</section>
+	</div>
+	<script type="text/javascript" src="js/Run1.js"></script>
+</body>
+</html>

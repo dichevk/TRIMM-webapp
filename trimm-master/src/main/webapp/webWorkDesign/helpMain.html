@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<script type="text/javascript" src="js/URLlock.js"></script>
+<title>Help | TRIMM Dashboard</title>
+<link href="css/helpMainCSS.css" rel="stylesheet">
+<script type="text/javascript" src="js/helpMainJS.js"></script>
+<script>
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "100%";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+</head>
+
+<body onload="checkIfloggedIn();">
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="Account.html">Account</a> <a href="Run1.html">My runs</a> <a
+			href="comparepage.html">Compare runs</a> <a href="#"
+			onclick="logout(); return false;">Log out</a>
+	</div>
+	<span
+		style="font-size: 50px; cursor: pointer; top: 0px; left: 3%; position: fixed; z-index: 10000; color: white"
+		onclick="openNav()">&#9776;</span>
+
+	<div class="card">
+		<img id="topright" src="trimm_logo.svg"> <img
+			src="runner-picture2.jpg" alt="Trimm"
+			style="width: 100%; height: 5%;">
+
+		<div id="faq">
+			<h1>Frequently asked questions</h1>
+			<hr id="main">
+
+			<h3>I can't see my runs or compare runs?</h3>
+			<h3>
+				<p>In order to select runs a log in is required. This can be
+					done by selecting the menu in the top left corner and select log
+					in.</p>
+				<hr>
+
+				<h3>
+					I can't log in?
+					<h3>
+						<p>In order to log in an account has to be created. This can
+							be done by selecting the menu in the top left corner and select
+							register.</p>
+						<hr>
+						<h3>
+							All of the information in my runs is shown at the same time?
+							<h3>
+								<p>The graphs can be modified by selecting what is desired
+									to be shown by the buttons on the right side of the graph.</p>
+								<hr>
+								<h3>
+									I can't compare runs?
+									<h3>
+										<p>In order to compare runs selection on what is desired
+											to compare has to be done fistly by choosing from the buttons
+											on the right side of each graph. After that select the runs,
+											which are desired to be compared.</p>
+										<hr>
+										<h3>
+											I can't remove runs while comparing?
+											<h3>
+												<p>After selecting runs they can be removed by selecting
+													the Remove runs button. There can be seen all the selected
+													runs and by pressing them they can be removed</p>
+		</div>
+
+		
+</body>

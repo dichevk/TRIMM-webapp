@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<!--  <link rel="stylesheet" type="text/css"
+	href = "path/to/chartjs/dist/Chart.min.css" > -->
+</head>
+<body>
+<div><canvas id="mysecondChart"></canvas></div>
+<script>
+
+function createChart() {
+	var labelforgraph=[];
+	var dataforgraph=[];
+	var ctx = document.getElementById('chart1').getContext('2d');
+	chart = new Chart(ctx, {
+		type : 'line',
+		data : {
+			labels : ,
+			datasets : [ {
+				label : 'Impact',
+				data : ,
+				backgroundColor : 'rgba(241, 181, 181, 0)',
+				borderColor : 'rgba(226, 94, 94, 1)',
+				pointBackgroundColor : 'rgba(226, 94, 94, 1)',
+				pointBorderColor : 'rgba(217, 48, 48, 1)',
+				borderWidth : 1
+			}, {
+				label : 'Braking force',
+				data : resultBrakingForce,
+				backgroundColor : 'rgba(181, 241, 211, 0)',
+				borderColor : 'rgba(92, 223, 158, 1)',
+				pointBackgroundColor : 'rgba(92, 223, 158, 1)',
+				pointBorderColor : 'rgba(49, 215, 132, 1)',
+				borderWidth : 1
+			}, {
+				label : 'Push-off power',
+				data : resultPushOff,
+				backgroundColor : 'rgba(75, 158, 240, 0)',
+				borderColor : 'rgba(75, 158, 240, 1)',
+				pointBackgroundColor : 'rgba(16, 107, 198, 1)',
+				pointBorderColor : 'rgba(12, 81, 150, 1)',
+				borderWidth : 1
+			}, {
+				label : 'Pace',
+				data : resultPace,
+				backgroundColor : 'rgba(75, 158, 240, 0)',
+				borderColor : 'rgba(183, 119, 247, 1)',
+				pointBackgroundColor : 'rgba(140, 40, 240, 1)',
+				pointBorderColor : 'rgba(104, 8, 200, 1)',
+				borderWidth : 1
+			} ]
+		},
+		options : {
+			responsive : true,
+			maintainAspectRatio : false,
+			scales : {
+				yAxes : [ {
+					ticks : {
+						beginAtZero : true
+					}
+				} ]
+			}
+		}
+	});
+}
+</script>
+</body>
+</html>

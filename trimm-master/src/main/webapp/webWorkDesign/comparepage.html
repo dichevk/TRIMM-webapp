@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<title>Compare Runs | TRIMM Dashboard</title>
+<link href="css/comparepageCSS.css" rel="stylesheet">
+<script type="text/javascript" src="js/comparepageJS.js"></script>
+<script type="text/javascript" src="js/URLlock.js"></script>
+<script>
+ function openNav() {
+  document.getElementById("mySidenav").style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+</script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<!--  <link rel="stylesheet" type="text/css"
+	href = "path/to/chartjs/dist/Chart.min.css" > -->
+<body>
+	<span
+		id="open" style="font-size: 50px; position: absolute; overflow: auto; cursor: pointer; top: 0px; left: 3%; z-index: 10000000; color: white"
+		onclick="openNav()">&#9776;</span>
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="Account.html">Account</a> <a href="MyRuns.html">My Runs</a> <a
+			href="helpMain.html">Help</a> <a href="#"
+			onclick="logout(); return false;">Log out</a>
+
+	</div>
+	<div class="container">
+		<section class="first_run">
+			<button id="Pace1" class="btn"
+				onclick="onWhatToCompare(&quot;average_pace&quot;); return false;">Pace</button>
+			<button id="Duration1" class="btn"
+				onclick="onWhatToCompare(&quot;duration&quot;); return false;">Duration</button>
+			<button id="Steps1" class="btn"
+				onclick="onWhatToCompare(&quot;steps&quot;); return false;">Steps</button>
+			<div id="add-runs">
+				<button id="add" class="btn">Add run(s)</button>
+				<div class="dropdown-content" id="firstpagetoadd"></div>
+			</div>
+			<div id="remove-runs">
+				<button class="btn">Remove run(s)</button>
+				<div class="dropdown-content" id="firstpagetoremove">
+					<button class="buttonRemove"
+						onclick="removeFirstAll(); return false;">Remove all</button>
+
+				</div>
+			</div>
+			<div id="sort-by">
+				<button class="btn">Sort by</button>
+				<div class="dropdown-content">
+					<button class="buttonSort" onclick="ascOrDsc(1); return false;">Ascending</button>
+					<button class="buttonSort" onclick="ascOrDsc(0); return false;">Descending</button>
+				</div>
+			</div>
+
+			<div id="graph1">
+				<canvas id="myChart"></canvas>
+			</div>
+
+		</section>
+		<section class="second_run">
+			<button id="tibial-impact" class="btn"
+				onclick="setVariable(&quot;tibimpact&quot;); return false;">Tibial
+				impact</button>
+			<button id="breaking-force" class="btn"
+				onclick="setVariable(&quot;brakingforce&quot;); return false;">Braking
+				force</button>
+			<button id="push-off-power" class="btn"
+				onclick="setVariable(&quot;pushoffpower&quot;); return false;">Push
+				off power</button>
+			<button id="axial-tibial-acceleration" class="btn"
+				onclick="setVariable(&quot;axtibacc&quot;); return false;">Axial
+				tibial acceleration</button>
+			<button id="axial-sacral-acceleration" class="btn" class="btn"
+				onclick="setVariable(&quot;axsacacc&quot;); return false;">Axial
+				sacral acceleration</button>
+			<button id="sacral-impact" class="btn"
+				onclick="setVariable(&quot;sacimpact&quot;); return false;">Sacral
+				impact</button>
+			<button id="vertical-lower-leg-angle" class="btn"
+				onclick="setVariable(&quot;vll&quot;); return false;">Vertical
+				lower leg angle</button>
+			<div id="add-runs2">
+				<button class="btn">Add run(s)</button>
+				<div class="dropdown-content" id="secondpagetoadd"></div>
+			</div>
+			<div id="remove-runs2">
+				<button class="btn">Remove run(s)</button>
+				<div class="dropdown-content" id="secondpagetoremove">
+					<button class="buttonRemove" onclick="removeAll(); return false;">Remove
+						all</button>
+
+				</div>
+			</div>
+			<div id="graph2">
+				<canvas id="mysecondChart"></canvas>
+			</div>
+		</section>
+	</div>
+
+	
+
+</body>
+</html>

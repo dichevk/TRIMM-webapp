@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<style>
+	html,body{
+		margin:0;
+	}
+	body {
+  background-image: url('../webWorkDesign/running.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto 100%;
+  background-position: center center; 
+  z-index:-1;
+}
+#overview1{
+	padding:1%;
+	background-color:white;
+	position:fixed;
+	width: 13vw;
+	height: 13vh;  
+	top: 15%;
+	left: 15%;
+	border: 7px solid black;
+	z-index:1000;
+}
+#overview2{
+	padding:1%;
+	background-color:white; 
+	position:fixed;
+	width: 13vw;
+	height: 13vh;  
+	top: 15%;
+	left:35%;
+	border: 7px solid black;
+	z-index:1000;
+}
+#overview3{
+	padding:1%;
+	background-color:white; 
+	position:fixed;
+	width: 13vw;
+	height: 13vh;  
+	top: 15%;
+	left:55%;
+	border: 7px solid black;
+	z-index:1000;
+}
+#overview4{
+	
+	padding:1%;
+	background-color:white;
+	position:fixed;
+	width: 13vw;
+	height: 13vh;  
+	top: 15%;
+	left:75%;
+	border: 7px solid black;
+	z-index:1000;
+}
+.home-image{
+  width:15vw;
+  height:8vh;
+  overflow:auto; 
+  float:left; 
+  left:0%;
+  top:0;
+
+}
+#description-for-overview1{
+	position:fixed;
+	top:10%;
+	left:15%;
+	font-family:Gotham Ultra; 
+	font-size:2vh; 
+}
+#description-for-overview2{
+	position:fixed;
+	top:10%;
+	left:35%;
+	font-family:Gotham Ultra; 
+	font-size:2vh; 
+}
+#description-for-overview3{
+	position:fixed;
+	top:10%;
+	left:55%;
+	font-family:Gotham Ultra; 
+	font-size:2vh; 
+}
+#description-for-overview4{
+	position:fixed;
+	top:10%;
+	left:75%;
+	font-family:Gotham Ultra; 
+	font-size:2vh; 
+}
+
+</style>
+</head>
+<body>
+	<div class="home-button1">
+        <a href="../webWorkDesign/index.html">
+        <img src="../webWorkDesign/home pack.svg" class="home-image">
+    </a>
+<div class="overview">
+	<div id="overview1">
+	</div>
+	<div id="overview2">
+	</div>
+	<div id="overview3">
+	</div>
+	<div id="overview4">
+	</div>
+</div>
+
+<div id="description-for-overview1">
+	<p><b>Distance</b></p>
+</div>
+<div id="description-for-overview2">
+	<p><b>Time</b></p>
+</div>
+<div id="description-for-overview3">
+	<p><b>Description</b></p>
+</div>
+<div id="description-for-overview4">
+	<p><b>Date</b></p>
+</div>
+<script>
+	window.onload =function getOverview() {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			console.log(this.readyState + " " + this.status);
+			if (this.readyState == 4 && this.status == 200) {
+				var data = JSON.parse(this.responseText);
+				console.log(data.description);
+				var toPut = "";
+				
+				document.getElementById("overview1").innerHTML = "<div>"+"<p>"+data.distance+"</p></div>";
+				document.getElementById("overview2").innerHTML = "<div>"+"<p>"+data.time+"</p></div>";
+				document.getElementById("overview3").innerHTML = "<div>"+"<p>"+data.description+"</p></div>";
+				document.getElementById("overview4").innerHTML = "<div>"+"<p>"+data.date+"</p></div>";
+			}
+		}
+		xhr
+				.open(
+						"GET",
+						"http://localhost:8080/TRIMM_visualizing_runners_data_42/rest/data/overview_run?username=CvdB&run=1",
+						true);
+		xhr.send();
+	}
+	</script>
+</body>
+</html>

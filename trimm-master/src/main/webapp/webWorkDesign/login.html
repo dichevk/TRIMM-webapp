@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="css/login.css" rel="stylesheet">
+<title>Log In | TRIMM Dashboard</title>
+<script type="text/javascript" src="DOMPurify-master/dist/purify.min.js"></script>
+</head>
+
+<body>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="login.html">Login</a> <a
+			href="CreateAccount.html">Register</a> <a
+			href="help.html">Help</a>
+
+	</div>
+	<span
+		style="font-size: 50px; cursor: pointer; top: 0px; left: 3%; position: fixed; z-index: 10000; color: #fff"
+		onclick="openNav()">&#9776;</span>
+	<div id="main_box">
+		<img src="TRIMM WORDMARK.svg" id="logo">
+		<form id="input_form">
+
+			<div id="formtext">
+				<i class="fa fa-user icon"></i> <input type="text" name="username"
+					id="username" placeholder="username">
+			</div>
+
+			<div id="formtext">
+				<i class="fa fa-key icon"></i> <input type="password" id="password"
+					placeholder="password">
+			</div>
+			<a id="linkp" href="forgetpass.html">Forgot password?</a>
+
+			<center>
+				<div id="buttonspace">
+					<input type="submit" name="Log in" class="button buttonform"
+						onclick="sendLogIn(); return false;">
+				</div>
+				<div id="wrong"></div>
+				<a id="linkp" href="CreateAccount.html">Don't have an account
+					yet? Register here.</a>
+			</center>
+		</form>
+	</div>
+	<!--<script src="js/login.js"></script>  -->
+<script type="text/javascript" src="js/login.js"></script>
+
+</body>
+</html>

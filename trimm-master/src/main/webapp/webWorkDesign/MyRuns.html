@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="css/MyRuns.css" rel="stylesheet">
+<script type="text/javascript" src="js/URLlock.js"></script>
+
+<title>Runs | TRIMM Dashboard</title>
+<script>
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "100%";
+		//document.getElementById("mySidenav").style.height = "200%";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidenav").style.width = "0";
+	}
+</script>
+</head>
+<body id="body" onload="checkIfloggedIn(); createRunBoxes();">
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<!--  <a href="webWorkDesign/overview.html">Overview</a>-->
+		<a href="Account.html">Account</a> <a href="comparepage.html">Compare
+			Runs</a> <a href="helpMain.html">Help</a> <a href="#"
+			onclick="logout(); return false;">Log out</a>
+	</div>
+	<span id="open"
+		style="font-size: 50px; cursor: pointer; top: 0px; left: 3%; position: fixed; z-index: 10000; color: #cfd5fa"
+		onclick="openNav()">&#9776;</span>
+		<div id="mainBox">
+		</div>
+	
+		
+
+</body>
+<script type="text/javascript" src="js/MyRuns.js"></script>
